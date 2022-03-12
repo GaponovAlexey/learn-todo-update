@@ -6,10 +6,10 @@ import { fetchApi } from '../service/api'
 
 export const myRTQuest = createApi({
   reducerPath: 'redux/reducer',
-  baseQuery: fetchBaseQuery<TodoType, string>(fetchApi.getAll()),
+  baseQuery: fetchBaseQuery<TodoType, string>({ baseUrl: fetchApi.getAll() }),
   endpoints: (builder) => ({
-    getPokemonByName: builder.query({
-      query: (id) => `todos/${id}`,
+    getmyRTQuest: builder.query({
+      query: () => `/todos`,
     }),
   }),
 })
@@ -26,4 +26,4 @@ const counterSlice = createSlice({
 
 export default counterSlice.reducer
 
-export const { useGetPokemonByNameQuery } = myRTQuest
+export const { useGetmyRTQuestQuery } = myRTQuest

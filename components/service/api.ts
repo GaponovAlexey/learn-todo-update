@@ -1,4 +1,4 @@
-const BaseApi = 'https://jsonplaceholder.typicode.com/'
+const BaseApi = 'https://jsonplaceholder.typicode.com'
 
 export const fetchApi = {
   async getAll() {

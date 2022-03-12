@@ -1,8 +1,11 @@
 import type { NextPage } from 'next'
-import { useGetPokemonByNameQuery } from '../components/redux/reducer'
+import { useEffect, useState } from 'react'
+import { useGetmyRTQuestQuery } from '../components/redux/reducer'
+import { fetchApi } from '../components/service/api'
 
 const Home: NextPage = () => {
-  const { data, error, isLoading } = useGetPokemonByNameQuery('bulbasaur')
+  const { data, error, isLoading } = useGetmyRTQuestQuery('bulba')
+
   console.log(data)
 
   return <div>start</div>
