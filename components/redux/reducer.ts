@@ -1,29 +1,30 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { CounterState, TodoType } from '../type'
-
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { fetchApi } from '../service/api'
+import { BaseApi } from '../service/api'
 
 export const myRTQuest = createApi({
   reducerPath: 'redux/reducer',
-  baseQuery: fetchBaseQuery<TodoType, string>({ baseUrl: fetchApi.getAll() }),
-  endpoints: (builder) => ({
-    getmyRTQuest: builder.query({
-      query: () => `/todos`,
+  tagTypes: ['tag/todo'],
+  baseQuery: fetchBaseQuery({ baseUrl: BaseApi }),
+  endpoints: (build) => ({
+    getmyRTQuest: build.query({
+      query: (ids) => `/todos/${ids}`,
+      providesTags: (result) =>
+        result
+          ? [
+              ...result.map(({ id }) => ({ type: 'tag/todo', id })),
+              { type: 'tag/todo', id: 'LIST' },
+            ]
+          : [{ type: 'tag/todo', id: 'LIST' }],
+    }),
+    addProduct: build.mutation({
+      query: (body) => ({
+        url: '/todos/',
+        method: 'POST',
+        body,
+      }),
+      invalidatesTags: [{type: 'tag/todo', id: 'LIST'}]
     }),
   }),
 })
 
-const initialState: CounterState = {
-  data: [],
-}
-
-const counterSlice = createSlice({
-  name: 'counter',
-  initialState,
-  reducers: {},
-})
-
-export default counterSlice.reducer
-
-export const { useGetmyRTQuestQuery } = myRTQuest
+export const { useGetmyRTQuestQuery, useAddProductMutation } = myRTQuest

@@ -1,14 +1,46 @@
 import type { NextPage } from 'next'
-import { useEffect, useState } from 'react'
-import { useGetmyRTQuestQuery } from '../components/redux/reducer'
-import { fetchApi } from '../components/service/api'
+import { useState } from 'react'
+import {
+  useGetmyRTQuestQuery,
+  useAddProductMutation,
+} from '../components/redux/reducer'
 
 const Home: NextPage = () => {
-  const { data, error, isLoading } = useGetmyRTQuestQuery('bulba')
+  const { data: count, error } = useGetmyRTQuestQuery('')
+  console.log(count);
+  
+  const [addProduct, { isLoading }] = useAddProductMutation()
 
-  console.log(data)
+  const [newProduct, setnewProduct] = useState('')
 
-  return <div>start</div>
+  const handlerAddProduct = async () => {
+    if (newProduct) {
+      await addProduct({ id: Date.now(), title: newProduct }).unwrap()
+      setnewProduct('')
+    }
+  }
+
+  if (isLoading) {
+    return <div>Loading...</div>
+  }
+  return (
+    <div>
+      <h1>start</h1>
+      <input
+        type='text'
+        value={newProduct}
+        onChange={(e) => setnewProduct(e.target.value)}
+      />
+      <button onClick={handlerAddProduct}>send</button>
+      <ul>
+        <li>
+          {count?.map?.((el) => (
+            <li key={el.id}>{el.title}</li>
+          ))}
+        </li>
+      </ul>
+    </div>
+  )
 }
 
 export default Home
