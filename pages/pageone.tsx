@@ -7,14 +7,16 @@ import {
 import { DataTypeAPI, iPost } from '../components/type'
 
 const Pageone = () => {
-  const [limit, setlimit] = useState(10)
+  const { isLoading, error } = userAPI.useFetchAllUsersQuery('')
 
-  const { data, isLoading, error } = userAPI.useFetchAllUsersQuery(limit)
-  useLayoutEffect(() => {
-    setInterval(() => {
-      setlimit(2)
-    }, 3000)
-  }, [])
+  const [createPost, { data }] = userAPI.useCreatePostMutation()
+
+  const handleCreate = async () => {
+    const title = prompt('name')
+
+    await createPost({title, body: title} as DataTypeAPI)
+  }
+
   if (isLoading) {
     return <h1>Loading...</h1>
   }
@@ -24,12 +26,14 @@ const Pageone = () => {
   return (
     <div>
       <h1>start</h1>
-      <button onClick={() => refetch()}>ref</button>
+      <div>
+        <button onClick={handleCreate}>add new post</button>
+      </div>
       <ul>
-        {data?.map((el: iPost) => (
+        {data?.map((el: DataTypeAPI) => (
           <ul key={el.id}>
             <h3>{el.title}</h3>
-            <p>{el.body}</p>
+            {/* <p>{el.email}</p> */}
           </ul>
         ))}
       </ul>

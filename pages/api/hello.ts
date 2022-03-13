@@ -3,10 +3,12 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import { DataTypeAPI } from '../../components/type'
 
 const data = [
-  { id: 1, name: 'Vadim', email: 'vikram@gmail.com' },
-  { id: 2, name: 'slavik', email: 'slavik@gmail.com' },
-  { id: 3, name: 'igor', email: 'igor@gmail.com' },
-  { id: 4, name: 'taras', email: 'taras@gmail.com' },
+  {'id': 1, "title": 'server', 'autors': 'ttt' },
+  {'id': 2, "title": 'server', 'autors': 'ttt' },
+  // { id: 1, name: 'Vadim', email: 'vikram@gmail.com' },
+  // { id: 2, name: 'slavik', email: 'slavik@gmail.com' },
+  // { id: 3, name: 'igor', email: 'igor@gmail.com' },
+  // { id: 4, name: 'taras', email: 'taras@gmail.com' },
 ]
 
 export default function handler(

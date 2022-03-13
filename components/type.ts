@@ -1,5 +1,5 @@
-// export const baseApi = process.env.NEXT_PUBLIC_DB_API
-export const baseApi = process.env.NEXT_PUBLIC_DB_API_USERS
+export const baseApi = process.env.NEXT_PUBLIC_DB_API
+// export const baseApi = process.env.NEXT_PUBLIC_DB_API_USERS
 
 export interface CounterState {
   data: object
