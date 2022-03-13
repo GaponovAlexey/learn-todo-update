@@ -1,28 +1,31 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { BaseApi } from '../service/api'
+import { baseApi, DataTypeAPI } from '../type'
 
 export const myRTQuest = createApi({
   reducerPath: 'redux/reducer',
+  baseQuery: fetchBaseQuery({ baseUrl: baseApi }),
   tagTypes: ['tag/todo'],
-  baseQuery: fetchBaseQuery({ baseUrl: BaseApi }),
   endpoints: (build) => ({
     getmyRTQuest: build.query({
-      query: (ids) => `/todos/${ids}`,
+      query: () => `/hello`,
       providesTags: (result) =>
         result
           ? [
-              ...result.map(({ id }) => ({ type: 'tag/todo', id })),
+              ...result.map(({ id }: any) => ({ type: 'tag/todo', id })),
               { type: 'tag/todo', id: 'LIST' },
             ]
           : [{ type: 'tag/todo', id: 'LIST' }],
     }),
     addProduct: build.mutation({
       query: (body) => ({
-        url: '/todos/',
+        url: '/hello',
         method: 'POST',
         body,
       }),
-      invalidatesTags: [{type: 'tag/todo', id: 'LIST'}]
+      transformResponse: (rawResult: { result: { post: DataTypeAPI } }, meta) => {
+        return rawResult.result.post
+      },
+      invalidatesTags: [{ type: 'tag/todo', id: 'LIST' }],
     }),
   }),
 })
