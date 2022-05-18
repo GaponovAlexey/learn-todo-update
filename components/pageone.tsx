@@ -1,13 +1,16 @@
+import { useState } from 'react'
 import { useAddProductMutation, useGetmyRTQuestQuery } from './redux/reducer'
 
-const Pageone = () => {
+const Pageone = ({ refetch }: any) => {
   const { isLoading, error } = useGetmyRTQuestQuery('')
 
   const [addProduct, { data }] = useAddProductMutation()
+  const [datas, setdatas] = useState(data) || []
 
   const handleCreate = async () => {
     const title = prompt('name')
     await addProduct(title)
+    refetch()
   }
 
   return (
@@ -19,7 +22,9 @@ const Pageone = () => {
         <button onClick={handleCreate}>add new post</button>
       </div>
       <ul>
-        {/* {data && data?.map((el: any) => <div key={el.id}>{el.bookAuthor}</div>)} */}
+        {datas?.map((el: any) => (
+          <div key={el.id}>{el.bookAuthor}</div>
+        ))}
       </ul>
     </div>
   )
