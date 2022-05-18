@@ -7,7 +7,7 @@ export const myRTQuest = createApi({
   tagTypes: ['tag/todo'],
   endpoints: (build) => ({
     getmyRTQuest: build.query({
-      query: () => `/hello`,
+      query: () => `/`,
       providesTags: (result) =>
         result
           ? [
@@ -16,17 +16,16 @@ export const myRTQuest = createApi({
             ]
           : [{ type: 'tag/todo', id: 'LIST' }],
     }),
-    
     addProduct: build.mutation({
       query: (body) => ({
-        url: '/hello',
+        url: '/create',
         method: 'POST',
-        body,
+        body: {
+          title: body,
+          author: body,
+          genre: body,
+        },
       }),
-      transformResponse: (rawResult: { result: { post: DataTypeAPI } }, meta) => {
-        return rawResult.result.post
-      },
-      invalidatesTags: [{ type: 'tag/todo', id: 'LIST' }],
     }),
   }),
 })

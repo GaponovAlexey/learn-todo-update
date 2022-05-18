@@ -1,13 +1,13 @@
-import { userAPI } from './redux/service/UserService'
+import { useAddProductMutation, useGetmyRTQuestQuery } from './redux/reducer'
 
 const Pageone = () => {
-  const { isLoading, error } = userAPI.useFetchAllUsersQuery('')
+  const { isLoading, error } = useGetmyRTQuestQuery('')
 
-  const [createPost, { data }] = userAPI.useCreatePostMutation()
+  const [addProduct] = useAddProductMutation()
 
   const handleCreate = async () => {
     const title = prompt('name')
-    await createPost(title).unwrap()
+    await addProduct(title).unwrap()
   }
 
   return (

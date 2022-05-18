@@ -1,16 +1,12 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import { myRTQuest } from './reducer'
-import mySlice from './myReducer'
-import { userAPI } from './service/UserService'
-
 
 export const store = configureStore({
   reducer: {
-    reducer: mySlice,
-    [userAPI.reducerPath]: userAPI.reducer,
+    [myRTQuest.reducerPath]: myRTQuest.reducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(userAPI.middleware),
+    getDefaultMiddleware().concat(myRTQuest.middleware),
 })
 
 export type RootState = ReturnType<typeof store.getState>
