@@ -1,18 +1,14 @@
 import type { NextPage } from 'next'
 import { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
-import { useAppSelector } from '../components/hooks/redux'
 import { useActions } from '../components/hooks/useActions'
-import { fetchUsers } from '../components/redux/myReducer'
+import Pageone from '../components/pageone'
 import { useAddProductMutation } from '../components/redux/reducer'
-import { baseApi } from '../components/type'
-import Pageone from './pageone'
+import { userAPI } from '../components/redux/service/UserService'
 
 const Home: NextPage = () => {
-  const { users } = useAppSelector((state) => state.reducer)
-  const { fetchUsers } = useActions()
   const [newProduct, setnewProduct] = useState('')
-
+  const [ { } ] = userAPI.useFetchAllUsersQuery('')
+  const { fetchUsers } = useActions()
   useEffect(() => {
     fetchUsers()
   }, [])
@@ -32,7 +28,7 @@ const Home: NextPage = () => {
     <div>
       {isLoading && <div>Loading...</div>}
       <h1>start</h1>
-      {/* <Pageone /> */}
+      <Pageone />
 
       <input
         type='text'
@@ -42,9 +38,9 @@ const Home: NextPage = () => {
       <button onClick={handlerAddProduct}>send</button>
       <ul>
         <h2>
-          {users?.map?.((el: DataTypeAPI) => (
+          {users?.map?.((el: any) => (
             <div key={el.id}>
-              {el.autors}-{el.title}
+              {el.bookAuthor}-{el.title}
             </div>
           ))}
         </h2>

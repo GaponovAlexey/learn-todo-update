@@ -2,18 +2,18 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { DataTypeAPI } from '../../components/type'
 
-const data = [
-  {'id': 1, "title": 'server', 'autors': 'ttt' },
-  {'id': 2, "title": 'server', 'autors': 'ttt' },
-  // { id: 1, name: 'Vadim', email: 'vikram@gmail.com' },
-  // { id: 2, name: 'slavik', email: 'slavik@gmail.com' },
-  // { id: 3, name: 'igor', email: 'igor@gmail.com' },
-  // { id: 4, name: 'taras', email: 'taras@gmail.com' },
-]
+import { PrismaClient } from '@prisma/client'
 
-export default function handler(
-  req: NextApiRequest,
-  res: NextApiResponse<DataTypeAPI[]>
-) {
-  res.status(200).json(data)
+const prisma = new PrismaClient()
+
+export default async function (req: NextApiRequest, res: NextApiResponse) {
+  try {
+    const allBooks = await prisma.bookSugesstion.findMany()
+    return res.status(200).json(allBooks)
+  } catch (error) {
+    console.error('Request error', error)
+    res.status(500).json({ error: 'Error creating question', success: false })
+  } finally {
+    await prisma.$disconnect()
+  }
 }
