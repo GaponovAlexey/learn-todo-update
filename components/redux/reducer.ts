@@ -7,7 +7,7 @@ export const myRTQuest = createApi({
   tagTypes: ['tag/todo'],
   endpoints: (build) => ({
     getmyRTQuest: build.query({
-      query: () => `3 `,
+      query: () => ` `,
       providesTags: (result) =>
         result
           ? [
