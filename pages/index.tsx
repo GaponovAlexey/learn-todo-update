@@ -4,15 +4,15 @@ import { useDispatch } from 'react-redux'
 import { useAppSelector } from '../components/hooks/redux'
 import { useActions } from '../components/hooks/useActions'
 import { fetchUsers } from '../components/redux/myReducer'
-import {
-  useAddProductMutation
-} from '../components/redux/reducer'
+import { useAddProductMutation } from '../components/redux/reducer'
+import { baseApi } from '../components/type'
 import Pageone from './pageone'
 
 const Home: NextPage = () => {
-  // const { data, error } = useGetmyRTQuestQuery('')
   const { users } = useAppSelector((state) => state.reducer)
   const { fetchUsers } = useActions()
+  const [newProduct, setnewProduct] = useState('')
+
   useEffect(() => {
     fetchUsers()
   }, [])
@@ -27,16 +27,14 @@ const Home: NextPage = () => {
   }
 
   //text
-  const [newProduct, setnewProduct] = useState('')
-  if (isLoading) {
-    return <div>Loading...</div>
-  }
+
   return (
     <div>
+      {isLoading && <div>Loading...</div>}
       <h1>start</h1>
-    <Pageone />
+      {/* <Pageone /> */}
 
-      {/* <input
+      <input
         type='text'
         value={newProduct}
         onChange={(e) => setnewProduct(e.target.value)}
@@ -46,11 +44,11 @@ const Home: NextPage = () => {
         <h2>
           {users?.map?.((el: DataTypeAPI) => (
             <div key={el.id}>
-              {el.name}-{el.email}
+              {el.autors}-{el.title}
             </div>
           ))}
         </h2>
-      </ul> */}
+      </ul>
     </div>
   )
 }

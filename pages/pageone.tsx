@@ -13,8 +13,6 @@ const Pageone = () => {
 
   const handleCreate = async () => {
     const title = prompt('name')
-
-    await createPost({title, body: title} as DataTypeAPI)
   }
 
   if (isLoading) {
@@ -30,12 +28,7 @@ const Pageone = () => {
         <button onClick={handleCreate}>add new post</button>
       </div>
       <ul>
-        {data?.map((el: DataTypeAPI) => (
-          <ul key={el.id}>
-            <h3>{el.title}</h3>
-            {/* <p>{el.email}</p> */}
-          </ul>
-        ))}
+       
       </ul>
     </div>
   )

@@ -13,6 +13,7 @@ const initialState: UserStateType = {
   error: '',
   count: 0,
 }
+
 const mySlice = createSlice({
   name: 'todo/slice',
   initialState,

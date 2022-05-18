@@ -1,4 +1,6 @@
-export const baseApi = process.env.NEXT_PUBLIC_DB_API
+// export const baseApi = process.env.DATABASE_URL
+export const baseApi = 'http://localhost:3000/api'
+
 // export const baseApi = process.env.NEXT_PUBLIC_DB_API_USERS
 
 export interface CounterState {
