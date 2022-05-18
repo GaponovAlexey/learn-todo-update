@@ -4,21 +4,10 @@ import Pageone from '../components/pageone'
 import { useGetmyRTQuestQuery } from '../components/redux/reducer'
 
 const Home: NextPage = () => {
-  const [newProduct, setnewProduct] = useState('')
-
-  const { data } = useGetmyRTQuestQuery({ pollingInterval: 400 })
-  console.log(data)
-
+  const { data } = useGetmyRTQuestQuery({ pollingInterval: 1 })
   return (
     <div>
       <Pageone />
-      <input
-        style={{ outline: 'none' }}
-        type='text'
-        value={newProduct}
-        onChange={(e) => setnewProduct(e.target.value)}
-      />
-      <button>send</button>
       <ul>
         <h2>
           {data &&

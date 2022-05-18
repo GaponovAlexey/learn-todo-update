@@ -3,11 +3,11 @@ import { useAddProductMutation, useGetmyRTQuestQuery } from './redux/reducer'
 const Pageone = () => {
   const { isLoading, error } = useGetmyRTQuestQuery('')
 
-  const [addProduct] = useAddProductMutation()
+  const [addProduct, { data }] = useAddProductMutation()
 
   const handleCreate = async () => {
     const title = prompt('name')
-    await addProduct(title).unwrap()
+    await addProduct(title)
   }
 
   return (
@@ -18,7 +18,9 @@ const Pageone = () => {
       <div>
         <button onClick={handleCreate}>add new post</button>
       </div>
-      <ul></ul>
+      <ul>
+        {/* {data && data?.map((el: any) => <div key={el.id}>{el.bookAuthor}</div>)} */}
+      </ul>
     </div>
   )
 }
